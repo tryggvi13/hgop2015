@@ -2,7 +2,7 @@
 
 echo Cleaning...
 rm -rf ./dist
-ls
+
 npm install
 bower install
 

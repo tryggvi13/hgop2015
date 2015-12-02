@@ -3,6 +3,8 @@
 echo Cleaning...
 rm -rf ./dist
 
+echo wow
+
 npm install
 bower install
 
