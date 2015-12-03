@@ -8,15 +8,7 @@ module.exports = function(config) {
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
-    
-    reporters: ['progress', 'junit'],
 
-    junitReporter: {
-      outputDir: 'testResults', // results will be saved as $outputDir/$browserName.xml
-      outputFile: 'testResults.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
-      suite: '', // suite will become the package name attribute in xml testsuite element
-      useBrowserName: true // add browser name to report and classes names
-    }
     // list of files / patterns to load in the browser
     files: [
       'client/bower_components/jquery/dist/jquery.js',
