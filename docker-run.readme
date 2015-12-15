@@ -1,1 +1,1 @@
-docker run -p 80:8080 -d -e "NODE_ENV=production" gulli/tictactoe
+docker run -p 80:8080 -d -e "NODE_ENV=production" tryggvi93/tictactoe
