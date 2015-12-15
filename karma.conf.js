@@ -3,20 +3,13 @@
 
 module.exports = function(config) {
   config.set({
+
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
-    
-    reporters: ['progress', 'junit'],
 
-    junitReporter: {
-      outputDir: 'testResults', // results will be saved as $outputDir/$browserName.xml
-      outputFile: 'testResults.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
-      suite: '', // suite will become the package name attribute in xml testsuite element
-      useBrowserName: true // add browser name to report and classes names
-    }
     // list of files / patterns to load in the browser
     files: [
       'client/bower_components/jquery/dist/jquery.js',
@@ -68,6 +61,15 @@ module.exports = function(config) {
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
+
+    reporters: ['progress', 'junit'],
+
+    junitReporter: {
+                outputDir: 'testResults', // results will be saved as $outputDir/$browserName.xml
+                outputFile: "testResults.xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
+                suite: '', // suite will become the package name attribute in xml testsuite element
+                useBrowserName: true // add browser name to report and classes names
+    },
 
 
     // Start these browsers, currently available:
