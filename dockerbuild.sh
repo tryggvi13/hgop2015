@@ -62,7 +62,7 @@ docker build -t tryggvi93/tictactoe
 #    exit $rc
 #fi
 
-docker push tryggvi93/tictactoe
+#docker push tryggvi93/tictactoe
 #:$GIT_COMMIT
 #rc=$?
 #if [[ $rc != 0 ]] ; then
