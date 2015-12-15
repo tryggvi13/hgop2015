@@ -53,7 +53,8 @@ npm install --production
 #fi
 
 echo Building docker image
-docker build -t tryggvi93/tictactoe:$GIT_COMMIT .
+docker build -t tryggvi93/tictactoe
+#:$GIT_COMMIT .
 
 #rc=$?
 #if [[ $rc != 0 ]] ; then
@@ -61,7 +62,8 @@ docker build -t tryggvi93/tictactoe:$GIT_COMMIT .
 #    exit $rc
 #fi
 
-docker push tryggvi93/tictactoe:$GIT_COMMIT
+docker push tryggvi93/tictactoe
+#:$GIT_COMMIT
 #rc=$?
 #if [[ $rc != 0 ]] ; then
 #    echo "Docker push failed " $rc
