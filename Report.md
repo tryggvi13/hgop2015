@@ -15,3 +15,6 @@ Cross-platform umhverfi
 
 bower
 Pakkastjóri fyrir JSlibraries sem leyfir þér að skilgreina version og ná í dependencies
+
+docker
+Docker allows you to package an application with all of its dependencies into a standardized unit for software development.
