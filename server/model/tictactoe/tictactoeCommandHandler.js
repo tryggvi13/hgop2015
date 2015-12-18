@@ -1,13 +1,19 @@
+'use strict';
 var _ = require('lodash');
 module.exports = function tictactoeCommandHandler(events) {
   var gameState = {
     gameCreatedEvent : events[0],
-    board: [['','',''],['','',''],['','','']]
+    board: [['','',''],['','',''],['','','']],
+    totalMoves: 0,
+    currentSide : "X"
   };
 
   var eventHandlers={
     'MoveMade': function(event){
       gameState.board[event.x][event.y] = event.side;
+      if(event.side === "X") gameState.currentSide= "O";
+      else gameState.currentSide= "X";
+      gameState.totalMoves += 1;
     }
   };
 
@@ -16,6 +22,43 @@ module.exports = function tictactoeCommandHandler(events) {
     if(eventHandler) eventHandler(event);
   });
 
+
+  const HasWon = function(cmd){
+    let sum = 0;
+    //Vertical win
+    for(let i = 0; i < 3; ++i)
+    {
+      if(gameState.board[cmd.x][i] === cmd.side)
+        sum++;
+    }
+    if(sum === 2)
+      return true;
+
+    sum = 0;
+    //Horizontal win
+    for(let i = 0; i < 3; ++i){
+      if(gameState.board[i].[cmd.y] === cmd.side)
+        sum++;
+    }
+    if(sum === 2)
+      return true;
+
+    sum = 0;
+    //Diagonal win
+    for(let i = 0; i < 3; ++i) {
+      if(gameState.board[i][i] === cmd.side)
+        sum++;
+    }
+    if (sum === 2)
+      return true;
+
+    sum = 0;
+
+    for (let x = 2, y = 0; x > -1 && y < 3; --x, ++y) {
+      if (gameState.board[x][y] === cmd.side)
+        sum++;
+    }
+  };
   var handlers = {
     "CreateGame": function (cmd) {
       {
