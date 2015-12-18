@@ -27,18 +27,18 @@ function given(cmdName){
     name:cmdName,
     destination:undefined
   };
-  var expectations = [];
+  const expectations = [];
   var givenApi = {
     sendTo: function(dest){
       cmd.destination = dest;
       return givenApi;
     },
     expect: function(eventName){
-      expectations.push(eventName);
+      expectations.event(eventName);
       return givenApi;
     },
     withGameId: function(gameId){
-      expectations.push(gameId);
+      expectations.gameID = gameId;
       return givenApi;
     },
     when: function(done){
@@ -55,8 +55,8 @@ function given(cmdName){
             .expect('Content-Type', /json/)
             .end(function (err, res) {
               res.body.should.be.instanceof(Array);
-              should(res.body[res.body.length - 1]).have.property('event', expectations[0]);
-              should(res.body[res.body.length - 1]).have.property('gameId', expectations[1]);
+              should(res.body[res.body.length - 1]).have.property('event', expectations.event);
+              should(res.body[res.body.length - 1]).have.property('gameId', expectations.gameId);
               done()
             });
         });
