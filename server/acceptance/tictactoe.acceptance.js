@@ -4,6 +4,12 @@ var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
+const getApiUri = (command) => {
+  if (command.comm === "CreateGame") return "/api/createGame";
+  else if (command.comm === "JoinGame") return "/api/joinGame";
+  else if (command.comm === "MakeMove") return "/api/placeMove";
+};
+
 var given = require('../fluid-api/tictactoeFluid').given;
 var user = require('../fluid-api/tictactoeFluid').user;
 
