@@ -7,6 +7,65 @@ var acceptanceUrl = process.env.ACCEPTANCE_URL;
 var given = require('../fluid-api/tictactoeFluid').given;
 var user = require('../fluid-api/tictactoeFluid').user;
 
+function user(userName){
+  const api = {
+    createsGame: function(gameId){
+      return { id : "1234",
+        gameId : gameId,
+        comm: "CreateGame",
+        userName: userName,
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:29:29"
+      };
+    }
+  };
+  return api;
+};
+
+function given(cmdName){
+  var cmd={
+    name:cmdName,
+    destination:undefined
+  };
+  var expectations = [];
+  var givenApi = {
+    sendTo: function(dest){
+      cmd.destination = dest;
+      return givenApi;
+    },
+    expect: function(eventName){
+      expectations.push(eventName);
+      return givenApi;
+    },
+    withGameId: function(gameId){
+      expectations.push(gameId);
+      return givenApi;
+    },
+    when: function(done){
+      const req = request(acceptanceUrl);
+      req
+        .post('/api/createGame')
+        .type('json')
+        .send(cmd.name)
+        .end(function (err, res) {
+          if (err) return done(err);
+          req
+            .get('/api/gameHistory/999')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function (err, res) {
+              res.body.should.be.instanceof(Array);
+              should(res.body[res.body.length - 1]).have.property('event', expectations[0]);
+              should(res.body[res.body.length - 1]).have.property('gameId', expectations[1]);
+              done()
+            });
+        });
+    }
+  };
+  return givenApi;
+}
+
+
 describe('TEST ENV GET /api/gameHistory', function () {
 
   it('Should have ACCEPTANCE_URL environment variable exported.', function () {
